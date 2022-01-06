@@ -1,0 +1,39 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    &::-webkit-scrollbar{
+        width: 0.5rem;
+        background-color: rgba(211,211,211,0.3);
+        border-radius: 999px;
+    }
+}
+
+p,h1{
+    margin: 0;
+    padding: 0;
+}
+#root{
+    width: 100vw;
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+.auth-container{
+    background-color: rgba(211,211,211,0.3);
+    h1{
+        color:purple;
+    }
+    form{
+        row-gap: 1.5rem;
+        input{
+            border: none;
+            outline: none;
+            border-bottom: 1px solid black;
+            padding: 0.3rem;
+            background: transparent;
+            margin-bottom: 1rem;
+        }
+    }
+}
+
