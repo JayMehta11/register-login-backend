@@ -6,7 +6,61 @@ const mongoose = require('mongoose');
 const { query } = require('express');
 const user = mongoose.model('user');
 
-//Get user api with jwt token 
+//Get user api with jwt token '
+//redirected to a sample account information page.
+//Edit screen to change user entered profile fields.
+
+
+
+//edit user profile api
+app.post('/edit', (req, res) => {
+    const token = req.headers['authorization'];
+    if (token) {
+        jwt.verify(token, 'abcd', (err, decoded) => {
+            if (err) {
+                res.status(401).json({
+                    message: 'Invalid token'
+                });
+            } else {
+                user.findOne({
+                    _id: decoded.id
+                }, (err, user) => {
+                    if (err) {
+                        res.status(500).json({  
+                            message: 'Internal server error'
+                        });
+                    } else {
+                        if (user) {
+                            user.firstName = req.body.firstName;
+                            user.lastName = req.body.lastName;
+                            user.save((err) => {
+                                if (err) {
+                                    res.status(500).json({
+                                        message: 'Internal server error'
+                                    });
+                                } else {
+                                    res.status(200).json({
+                                        message: 'User profile updated successfully'
+                                    });
+                                }
+                            });
+                        } else {
+                            res.status(404).json({
+                                message: 'User not found'
+                            });
+                        }
+                    }
+                });
+            }
+        });
+    } else {
+        res.status(401).json({
+            message: 'Invalid token'
+        });
+    }
+});
+
+
 
 app.get('/',(req,res)=>{
     const token = req.headers['authorization'];
